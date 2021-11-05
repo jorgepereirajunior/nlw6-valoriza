@@ -3,8 +3,17 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+
+  "scripts": {
+    "build": "tsc",
+    "start": "yarn build && yarn start:prod",
+    "start:prod": "node dist/server.js",
+    "start:dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts"
+  },
   "dependencies": {
     "express": "^4.17.1",
+    "mysql2": "^2.3.3-rc.0",
+    "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.38"
   },
   "devDependencies": {
