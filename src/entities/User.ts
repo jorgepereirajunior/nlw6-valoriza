@@ -9,29 +9,29 @@ import { v4 as uuid } from 'uuid'
 @Entity('user', { schema: 'valoriza_db'})
 export class User {
   
-  @PrimaryColumn('varchar', { name: 'id', length: 50})
+  @PrimaryColumn({ type: 'uuid' })
   readonly id: string
 
-  @Column('varchar', { name: 'name', length: 60})
+  @Column({ type: 'varchar', length: 100})
   name: string
 
-  @Column('varchar', { name: 'email', length: 80})
+  @Column({ type: 'varchar'})
   email: string
 
-  @Column('varchar', { name: 'password', length: 24})
+  @Column({ type: 'varchar'})
   password: string
 
-  @Column('boolean', { name: 'admin', default: false})
+  @Column({ type: 'boolean', default: false})
   admin: boolean
 
-  @Column('timestamp', {
-    name: 'createdAt',
+  @Column({
+    type: 'timestamp',
     default: () => 'current_timestamp'
   })
   createdAt: Date
 
-  @Column('timestamp', {
-    name: 'updatedAt',
+  @Column({
+    type: 'timestamp',
     default: () => 'current_timestamp'
   })
   updatedAt: Date
