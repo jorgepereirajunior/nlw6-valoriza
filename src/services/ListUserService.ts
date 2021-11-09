@@ -8,7 +8,7 @@ export class ListUserService {
 
   public async execute() {
     const user = await this.userRepository.find()
-
+ 
     return user
   }
 }
