@@ -1,6 +1,7 @@
 import { Router } from 'express'
 
 import { ensureAdmin } from './middlewares/ensureAdmin'
+import { ensureAuthenticated } from './middlewares/ensureAuthenticated'
 
 import { CreateTagController } from './controllers/CreateTagController'
 import { CreateUserController } from './controllers/CreateUserController'
@@ -26,8 +27,8 @@ routes.post('/users', createUserController.handle)
 
 
 routes.get('/tags', listTagController.handle)
-routes.post('/tags', ensureAdmin, createTagController.handle)
+routes.post('/tags', ensureAuthenticated, ensureAdmin,  createTagController.handle)
 
 routes.post('/login', authenticateUserController.handle)
 
-routes.post('/compliments', createComplimentController.handle)
+routes.post('/compliments', ensureAuthenticated, createComplimentController.handle)
