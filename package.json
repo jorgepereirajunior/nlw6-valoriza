@@ -4,9 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "start": "node dist/server.js",
     "build": "tsc",
-    "start": "yarn build && yarn start:prod",
-    "start:prod": "node dist/server.js",
+    "start:prod": "yarn build && yarn start",
     "start:dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
     "typeorm": "ts-node-dev node_modules/typeorm/cli.js"
   },
