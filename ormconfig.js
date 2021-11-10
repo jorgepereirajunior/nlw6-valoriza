@@ -1,20 +1,20 @@
 module.exports = {
-  "type": "mysql",
-  "host": "localhost",
-  "port": 3306,
-  "username": "jorginho",
-  "password": "Jpjr309121!",
-  "database": "valoriza_db",
+  "type": process.env.TYPEORM_ENGINE,
+  "host": process.env.TYPEORM_HOST,
+  "port": process.env.TYPEORM_PORT,
+  "username": process.env.TYPEORM_USERNAME,
+  "password": process.env.TYPEORM_PASSWORD,
+  "database": process.env.TYPEORM_DATABASE,
 
   "migrations": [
-    "./src/database/migrations/*.ts"
+    process.env.ENVIRONMENT_DIRECTORY_MIGRATIONS
   ],
 
   "entities": [
-    "./src/entities/*.ts"
+    process.env.ENVIRONMENT_DIRECTORY_ENTITIES
   ],
 
   "cli": {
-    "migrationsDir": "./src/database/migrations"
+    "migrationsDir": process.env.ENVIRONMENT_DIRECTORY_SAVE_MIGRATIONS
   }
 }
