@@ -4,18 +4,15 @@ import { ensureAdmin } from './middlewares/ensureAdmin'
 import { ensureAuthenticated } from './middlewares/ensureAuthenticated'
 
 import { CreateTagController } from './controllers/CreateTagController'
-import { CreateUserController } from './controllers/CreateUserController'
-import { ListUserController } from './controllers/ListUserController'
 import { ListTagController } from './controllers/ListTagController'
 import { AuthenticateUserController } from './controllers/AuthenticateUserController'
 import { CreateComplimentController } from './controllers/CreateComplimentController'
 import { ListUserSendComplimentsController } from './controllers/ListUserSendComplimentsController'
 import { ListUserReceiveComplimentsController } from './controllers/ListUserReceiveComplimentsController'
+import { UserController } from './controllers/UserController'
 
 export const routes = Router()
 
-const createUserController = new CreateUserController()
-const listUserController = new ListUserController()
 const listUserSendComplimentController = new ListUserSendComplimentsController()
 const listUserReceiveComplimentController = new ListUserReceiveComplimentsController()
 
@@ -26,8 +23,9 @@ const authenticateUserController = new AuthenticateUserController()
 
 const createComplimentController = new CreateComplimentController()
 
-routes.get('/users', listUserController.handle)
-routes.post('/users', createUserController.handle)
+routes.get('/users/all', new UserController().requestAll)
+routes.get('/users', new UserController().requestByName)
+routes.post('/users', new UserController().requestToCreateUser)
 
 routes.get('/users/compliments_send', ensureAuthenticated, listUserSendComplimentController.handle)
 routes.get('/users/compliments_receive', ensureAuthenticated, listUserReceiveComplimentController.handle)
