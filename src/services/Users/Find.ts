@@ -21,4 +21,7 @@ export class Find {
 
     return user
   }
+
+  // public async byComplimentsSended(id: string)
+  
 }

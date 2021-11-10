@@ -26,6 +26,7 @@ const createComplimentController = new CreateComplimentController()
 routes.get('/users/all', new UserController().requestAll)
 routes.get('/users', new UserController().requestByName)
 routes.post('/users', new UserController().requestToCreateUser)
+routes.delete('/users/:id', new UserController().requestToDeleteUser)
 
 routes.get('/users/compliments_send', ensureAuthenticated, listUserSendComplimentController.handle)
 routes.get('/users/compliments_receive', ensureAuthenticated, listUserReceiveComplimentController.handle)
