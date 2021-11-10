@@ -33,7 +33,7 @@ routes.get('/users/compliments_send', ensureAuthenticated, listUserSendComplimen
 routes.get('/users/compliments_receive', ensureAuthenticated, listUserReceiveComplimentController.handle)
 
 
-routes.get('/tags', listTagController.handle)
+routes.get('/tags', ensureAuthenticated, listTagController.handle)
 routes.post('/tags', ensureAuthenticated, ensureAdmin,  createTagController.handle)
 
 routes.post('/login', authenticateUserController.handle)
