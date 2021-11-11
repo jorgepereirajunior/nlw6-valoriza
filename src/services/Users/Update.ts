@@ -1,7 +1,8 @@
 import { getCustomRepository } from "typeorm";
-import { RequestToUpdateUser } from "../../controllers/UserController";
 import { UserRepository } from "../../repositories/UserRepository";
+import { RequestToCreateUser } from "./Create";
 
+export interface RequestToUpdateUser extends RequestToCreateUser {}
 
 export class Update {
   constructor(private userRepository = getCustomRepository(UserRepository)) {}

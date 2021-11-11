@@ -1,18 +1,14 @@
 import { Request, Response} from 'express'
-import { UserService } from '../services/Users';
+import { UserServices } from '../services/Users';
+import { RequestToCreateUser } from '../services/Users/Create';
+import { RequestToUpdateUser } from '../services/Users/Update';
 
-export interface RequestToCreateUser {
-  name: string
-  email: string
-  password: string
-  admin?: boolean
-}
 
-export interface RequestToUpdateUser extends RequestToCreateUser {}
+
 export class UserController {
   
   public async requestAll(request: Request, response: Response): Promise<Response> {
-    const userServices = new UserService()
+    const userServices = new UserServices()
 
     const users = await userServices.find().all()
 
@@ -20,7 +16,7 @@ export class UserController {
   }
 
   public async requestByName(request: Request, response: Response): Promise<Response> {
-    const userServices = new UserService()
+    const userServices = new UserServices()
 
     const { name } = request.query
 
@@ -30,7 +26,7 @@ export class UserController {
   }
 
   public async requestToCreateUser(request: Request, response: Response): Promise<Response> {
-    const userServices = new UserService()
+    const userServices = new UserServices()
     const user: RequestToCreateUser = request.body
 
     await userServices.create().execute(user)
@@ -39,7 +35,7 @@ export class UserController {
   }
 
   public async requestToUpdateUser(request: Request, response: Response): Promise<Response> {
-    const userServices = new UserService()
+    const userServices = new UserServices()
     const { id } = request.params
     const userUpdate: RequestToUpdateUser = request.body
 
@@ -49,7 +45,7 @@ export class UserController {
   }
 
   public async requestToDeleteUser(request: Request, response: Response): Promise<Response> {
-    const userServices = new UserService()
+    const userServices = new UserServices()
     const { id } = request.params
 
     await userServices.delete().execute(id)
@@ -59,7 +55,7 @@ export class UserController {
 
   public async requestComplimentsSent(request: Request, response: Response): Promise<Response> {
     const { user_id } = request
-    const userServices = new UserService()
+    const userServices = new UserServices()
 
     const myComplimentsSent = await userServices.find().complimentsSent(user_id)
 
@@ -68,7 +64,7 @@ export class UserController {
 
   public async requestComplimentsReceived(request: Request, response: Response): Promise<Response> {
     const { user_id } = request
-    const userServices = new UserService()
+    const userServices = new UserServices()
 
     const myComplimentsReceived = await userServices.find().complimentsReceived(user_id)
 

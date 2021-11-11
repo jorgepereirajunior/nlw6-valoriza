@@ -3,16 +3,13 @@ import { Router } from 'express'
 import { ensureAdmin } from './middlewares/ensureAdmin'
 import { ensureAuthenticated } from './middlewares/ensureAuthenticated'
 
-import { CreateTagController } from './controllers/CreateTagController'
-import { ListTagController } from './controllers/ListTagController'
 import { AuthenticateUserController } from './controllers/AuthenticateUserController'
 import { CreateComplimentController } from './controllers/CreateComplimentController'
 import { UserController } from './controllers/UserController'
+import { TagController } from './controllers/TagController'
 
 export const routes = Router()
 
-const createTagController = new CreateTagController()
-const listTagController = new ListTagController()
 
 const authenticateUserController = new AuthenticateUserController()
 
@@ -28,8 +25,10 @@ routes.get('/users/compliments_send', ensureAuthenticated, new UserController().
 routes.get('/users/compliments_receive', ensureAuthenticated, new UserController().requestComplimentsReceived)
 
 
-routes.get('/tags', ensureAuthenticated, listTagController.handle)
-routes.post('/tags', ensureAuthenticated, ensureAdmin,  createTagController.handle)
+routes.get('/tags', ensureAuthenticated, new TagController().requestAll)
+routes.post('/tags', ensureAuthenticated, ensureAdmin,  new TagController().requestToCreate)
+routes.put('/tags/:id', ensureAuthenticated, ensureAdmin, new TagController().requestToUpdate)
+routes.delete('/tags/:id', ensureAuthenticated, ensureAdmin, new TagController().requestToDelete)
 
 routes.post('/login', authenticateUserController.handle)
 

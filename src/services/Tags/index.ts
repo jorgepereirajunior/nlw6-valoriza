@@ -3,7 +3,8 @@ import { Delete } from "./Delete";
 import { Find } from "./Find";
 import { Update } from "./Update";
 
-export class UserServices {
+
+export class TagServices {
   public find(): Find {
     return new Find()
   }
