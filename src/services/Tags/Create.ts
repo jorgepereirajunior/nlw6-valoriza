@@ -9,7 +9,7 @@ export interface RequestToCreateTag {
 export class Create {
   constructor(private tagRepository = getCustomRepository(TagRepository)) {}
 
-  public async execute({name}: RequestToCreateTag): Promise<Tag> {
+  public async execute({ name }: RequestToCreateTag): Promise<Tag> {
     
     if (!name) throw new Error('Name incorrect')
 

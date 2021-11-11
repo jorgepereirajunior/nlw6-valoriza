@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { TagServices } from "../services/Tags";
+import { RequestToCreateTag } from "../services/Tags/Create";
 import { RequestToUpdateTag } from "../services/Tags/Update";
 
 
@@ -16,9 +17,9 @@ export class TagController {
   public async requestToCreate(request: Request, response: Response): Promise<Response> {
     const tagServices = new TagServices()
 
-    const { name } = request.body
+    const { name }: RequestToCreateTag = request.body
 
-    const tag = await tagServices.create().execute(name)
+    const tag = await tagServices.create().execute({name})
 
     return response.status(201).json(tag)
   }
