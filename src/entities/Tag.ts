@@ -5,6 +5,14 @@ import {
 } from 'typeorm'
 
 import { v4 as uuid} from 'uuid'
+
+export interface CreateTag {
+  name: string
+}
+
+export interface UpdateTag extends CreateTag {}
+
+
 @Entity('tag', { schema: 'valoriza_db'})
 export class Tag {
 

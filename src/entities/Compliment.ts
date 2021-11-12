@@ -7,8 +7,20 @@ import {
 } from 'typeorm'
 
 import { v4 as uuid} from 'uuid'
+import { CreateComplimentController } from '../controllers/CreateComplimentController'
 import { Tag } from './Tag'
 import { User } from './User'
+
+export interface CreateCompliment {
+  tag_id: string
+  user_sender: string
+  user_receiver: string
+  message: string
+}
+
+export interface RequestCreteCompliment extends Omit<CreateCompliment, 'user_sender'> {}
+
+
 
 @Entity('compliment', { schema: 'valoriza_db'})
 export class Compliment {

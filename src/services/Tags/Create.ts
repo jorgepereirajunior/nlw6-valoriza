@@ -1,15 +1,11 @@
 import { getCustomRepository } from "typeorm";
-import { Tag } from "../../entities/Tag";
+import { CreateTag, Tag } from "../../entities/Tag";
 import { TagRepository } from "../../repositories/TagRepositories";
-
-export interface RequestToCreateTag {
-  name: string
-}
 
 export class Create {
   constructor(private tagRepository = getCustomRepository(TagRepository)) {}
 
-  public async execute({ name }: RequestToCreateTag): Promise<Tag> {
+  public async execute({ name }: CreateTag): Promise<Tag> {
     
     if (!name) throw new Error('Name incorrect')
 

@@ -1,13 +1,12 @@
 import { getCustomRepository } from "typeorm";
+import { UpdateTag } from "../../entities/Tag";
 import { TagRepository } from "../../repositories/TagRepositories";
-import { RequestToCreateTag } from "./Create";
 
-export interface RequestToUpdateTag extends RequestToCreateTag {}
 
 export class Update {
   constructor(private tagRepository = getCustomRepository(TagRepository)) {}
 
-  public async execute(id: string, tagUpdate: RequestToUpdateTag): Promise<void> {
+  public async execute(id: string, tagUpdate: UpdateTag): Promise<void> {
 
     if (!id) throw new Error('Incorrect query')
 
