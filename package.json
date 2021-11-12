@@ -7,10 +7,11 @@
     "start": "node dist/server.js",
     "build": "tsc",
     "start:prod": "yarn build && yarn start",
-    "start:dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
+    "start:dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/index.ts",
     "typeorm": "ts-node-dev node_modules/typeorm/cli.js"
   },
   "dependencies": {
+    "@overnightjs/core": "^1.7.6",
     "bcryptjs": "^2.4.3",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
