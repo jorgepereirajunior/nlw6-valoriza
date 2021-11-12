@@ -1,11 +1,16 @@
-import { Request, Response } from "express";
-import { TagServices } from "../services/Tags";
-import { RequestToCreateTag } from "../services/Tags/Create";
-import { RequestToUpdateTag } from "../services/Tags/Update";
+import { Controller, Get, Post, Put, Delete, Middleware } from '@overnightjs/core'
+import { Request, Response } from "express"
+import { TagServices } from "../services/Tags"
+import { mustBeAuthenticated } from '../middlewares/MustBeAuthenticated'
+import { mustBeAdmin } from '../middlewares/MustBeAdmin'
+import { CreateTag, UpdateTag } from '../entities/Tag'
 
 
+@Controller('tags')
 export class TagController {
 
+  @Get('all')
+  @Middleware(mustBeAuthenticated)
   public async requestAll(request: Request, response: Response): Promise<Response> {
     const tagServices = new TagServices()
 
@@ -14,26 +19,32 @@ export class TagController {
     return response.status(200).json(tags)
   }
 
+  @Post('')
+  @Middleware([mustBeAuthenticated, mustBeAdmin])
   public async requestToCreate(request: Request, response: Response): Promise<Response> {
     const tagServices = new TagServices()
 
-    const { name }: RequestToCreateTag = request.body
+    const { name }: CreateTag = request.body
 
     const tag = await tagServices.create().execute({name})
 
     return response.status(201).json(tag)
   }
 
+  @Put(':id')
+  @Middleware([mustBeAuthenticated, mustBeAdmin])
   public async requestToUpdate(request: Request, response: Response): Promise<Response> {
     const tagServices = new TagServices()
     const { id } = request.params
-    const tagUpdate: RequestToUpdateTag = request.body
+    const tagUpdate: UpdateTag = request.body
 
     await tagServices.update().execute(id, tagUpdate)
 
     return response.status(201).json({ message: 'Tag updated!'})
   }
 
+  @Delete(':id')
+  @Middleware([mustBeAuthenticated, mustBeAdmin])
   public async requestToDelete(request: Request, response: Response): Promise<Response> {
     const tagServices = new TagServices()
     const { id } = request.params
