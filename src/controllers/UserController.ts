@@ -1,9 +1,8 @@
 import { Controller, Get, Post, Put, Delete, Middleware } from '@overnightjs/core'
 import { Request, Response} from 'express'
+import { CreateUser, UpdateUser } from '../entities/User';
 import { mustBeAuthenticated } from '../middlewares/MustBeAuthenticated';
-import { UserServices } from '../services/Users';
-import { RequestToCreateUser } from '../services/Users/Create';
-import { RequestToUpdateUser } from '../services/Users/Update';
+import { UserServices } from '../services/users';
 
 
 
@@ -33,7 +32,7 @@ export class UserController {
   @Post('')
   public async requestToCreateUser(request: Request, response: Response): Promise<Response> {
     const userServices = new UserServices()
-    const user: RequestToCreateUser = request.body
+    const user: CreateUser = request.body
 
     await userServices.create().execute(user)
 
@@ -44,7 +43,7 @@ export class UserController {
   public async requestToUpdateUser(request: Request, response: Response): Promise<Response> {
     const userServices = new UserServices()
     const { id } = request.params
-    const userUpdate: RequestToUpdateUser = request.body
+    const userUpdate: UpdateUser = request.body
 
     await userServices.update().execute(id, userUpdate)
 
@@ -73,7 +72,8 @@ export class UserController {
   }
 
   @Get('compliments_receive')
-  @Middleware(mustBeAuthenticated)
+  @Middleware(mustBeAuthenticated
+    )
   public async requestComplimentsReceived(request: Request, response: Response): Promise<Response> {
     const { user_id } = request
     const userServices = new UserServices()

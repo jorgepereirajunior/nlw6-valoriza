@@ -6,6 +6,15 @@ import {
 
 import { v4 as uuid } from 'uuid'
 
+export interface CreateUser {
+  name: string
+  email: string
+  password: string
+  admin?: boolean
+}
+
+export interface UpdateUser extends CreateUser {}
+
 @Entity('user', { schema: 'valoriza_db'})
 export class User {
   

@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Put, Delete, Middleware } from '@overnightjs/core'
 import { Request, Response } from "express"
-import { TagServices } from "../services/Tags"
+import { TagServices } from "../services/tags"
 import { mustBeAuthenticated } from '../middlewares/MustBeAuthenticated'
 import { mustBeAdmin } from '../middlewares/MustBeAdmin'
 import { CreateTag, UpdateTag } from '../entities/Tag'

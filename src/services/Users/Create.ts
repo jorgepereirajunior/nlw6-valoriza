@@ -1,21 +1,16 @@
-import { User } from "../../entities/User";
+import { CreateUser, User } from "../../entities/User";
 import { UserRepository } from "../../repositories/UserRepository";
 
 import { hash } from 'bcryptjs'
 import { getCustomRepository } from "typeorm";
 
-export interface RequestToCreateUser {
-  name: string
-  email: string
-  password: string
-  admin?: boolean
-}
+
 
 export class Create {
 
   constructor(private userRepository = getCustomRepository(UserRepository)) {}
 
-  public async execute({ name, email, password, admin}: RequestToCreateUser): Promise<User> {
+  public async execute({ name, email, password, admin}: CreateUser): Promise<User> {
     
     if (!email) {
       throw new Error('Email incorrect!')  

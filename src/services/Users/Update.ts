@@ -1,13 +1,11 @@
 import { getCustomRepository } from "typeorm";
-import { UserRepository } from "../../repositories/UserRepository";
-import { RequestToCreateUser } from "./Create";
-
-export interface RequestToUpdateUser extends RequestToCreateUser {}
+import { UpdateUser } from "../../entities/User";
+import { UserRepository } from "../../repositories/UserRepository"
 
 export class Update {
   constructor(private userRepository = getCustomRepository(UserRepository)) {}
 
-  public async execute(id: string, userUpate: RequestToUpdateUser): Promise<void> {
+  public async execute(id: string, userUpate: UpdateUser): Promise<void> {
 
     if (!id) throw new Error('Incorrect query')
 
